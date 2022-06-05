@@ -28,7 +28,7 @@
             </v-sheet>
           </v-col> -->
           <v-col>
-            <v-text-field v-model="diaryEntry.title" color="primary" variant="outlined"></v-text-field>
+            <v-text-field v-model="diaryEntry.title" color="primary" variant="outlined" @update:model-value="debounceUpdate"></v-text-field>
             <v-textarea v-model="diaryEntry.text" color="primary" auto-grow @update:model-value="debounceUpdate"
               variant="outlined" label="Dear Diary">
             </v-textarea>
