@@ -18,6 +18,9 @@
                     <v-text-field :rules="[rulesIsRequired, rulesIsRightDateFormat]" variant="outlined"
                         density="compact" label="Birthdate" placeholder="DD/MM/YYYY" type="text"
                         v-model="form.birthdate"></v-text-field>
+                    <v-select transition="scroll-y-transition" :items="Object.keys(lifeExpectancy)"
+                        :rules="[rulesIsRequired]" variant="outlined" density="compact" label="Country" type="text"
+                        v-model="form.country"></v-select>
                 </v-card-text>
             </v-window-item>
 
@@ -47,15 +50,18 @@
 <script>
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { collection, doc, setDoc } from "firebase/firestore";
+import lifeExpectancy from "@/assets/json/lifeExpectancy.json"
 export default {
     name: "SignUpView",
     data: () => ({
+        lifeExpectancy: lifeExpectancy,
         step: 1,
         filled: false,
         form: {
             email: null,
             password: null,
             birthdate: null,
+            country: null
         },
     }),
     methods: {
@@ -71,7 +77,9 @@ export default {
                     setDoc(doc(col, user.uid), {
                         email: this.form.email,
                         uid: user.uid,
-                        birthdate: this.form.birthdate
+                        birthdate: this.form.birthdate,
+                        country: this.form.country,
+                        lifeExpectancy: lifeExpectancy[this.form.country]
                     })
                         .then(() => {
                             this.$router.push("/")
@@ -128,7 +136,7 @@ export default {
                 case 1:
                     return "Enter Email";
                 case 2:
-                    return "Select Birthday";
+                    return "Set Data";
                 default:
                     return "Create A Password";
             }

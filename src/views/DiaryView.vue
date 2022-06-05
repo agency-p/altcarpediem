@@ -63,14 +63,14 @@ export default {
     async syncDiaryEntry() {
       this.saved = false
       let d = this.displayTime.split("/")
-      await updateDoc(doc(this.$db, "diary", `${this.uid}-${d[0]}${d[1]}${d[2]}`), this.diaryEntry);
+      await updateDoc(doc(this.$db, "diary", `${this.user.uid}-${d[0]}${d[1]}${d[2]}`), this.diaryEntry);
       setTimeout(() => {
         this.saved = true
       }, 350)
     },
     async getDiaryEntry(date) {
       let d = date.split("/")
-      const diaryDoc = await getDoc(doc(this.$db, "diary", `${this.uid}-${d[0]}${d[1]}${d[2]}`));
+      const diaryDoc = await getDoc(doc(this.$db, "diary", `${this.user.uid}-${d[0]}${d[1]}${d[2]}`));
 
       if (diaryDoc.exists()) {
         this.diaryEntry = diaryDoc.data()
@@ -81,7 +81,7 @@ export default {
           text: "",
           title: ""
         }
-        await setDoc(doc(this.$db, "diary", `${this.uid}-${d[0]}${d[1]}${d[2]}`), {
+        await setDoc(doc(this.$db, "diary", `${this.user.uid}-${d[0]}${d[1]}${d[2]}`), {
           imgs: [],
           liked: false,
           text: "",
@@ -95,7 +95,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(useUserAccStore, ["uid"]),
+    ...mapState(useUserAccStore, ["user"]),
     ...mapState(useTimeMachineStore, ["displayTime"])
   },
   created() {

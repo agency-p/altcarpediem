@@ -29,7 +29,7 @@ router.isReady().then(() => {
       const userAccStore = useUserAccStore();
       const docRef = doc(db, "accs", user.uid);
       const docData = await getDoc(docRef);
-      userAccStore.updateUserData(user.uid, docData.data().birthdate);
+      userAccStore.updateUserData(user.uid, docData.data());
       router.push("/");
     } else {
       router.push("/auth");

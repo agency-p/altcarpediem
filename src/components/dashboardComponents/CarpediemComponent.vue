@@ -3,6 +3,8 @@
         <v-card class="graph mx-auto mt-8" rounded="xl" elevation="4">
             <v-toolbar flat class="rounded-t-xl">
                 <v-toolbar-title>Carpediem</v-toolbar-title>
+                <v-toolbar-items>
+                </v-toolbar-items>
             </v-toolbar>
 
             <v-card-text class="pa-8">
@@ -13,8 +15,10 @@
     </v-container>
 </template>
 
-<script lang="ts">
+<script>
 import moment from "moment"
+import { mapState } from "pinia";
+import { useUserAccStore } from "@/stores/userAcc";
 export default {
     name: "CarpediemComponent",
     mounted() {
@@ -23,15 +27,18 @@ export default {
         var b = moment();
         let weekAge = b.diff(a, "week")
         for (var i = 1; i < 4160; i++) {
-            let level: number
+            let level
             if (weekAge >= i) {
                 level = 3
             }
             else {
                 level = 1
             }
-            squares!.insertAdjacentHTML('beforeend', `<div class="square" data-level="${level}"></div>`);
+            squares.insertAdjacentHTML('beforeend', `<div class="square" data-level="${level}"></div>`);
         }
+    },
+    computed: {
+        ...mapState(useUserAccStore, ["user"])
     }
 }
 </script>
@@ -49,7 +56,7 @@ export default {
 }
 
 .square[data-level="1"] {
-    background-color: #c6e48b;
+    background-color: #ECE1FD;
 }
 
 .square[data-level="2"] {
@@ -57,6 +64,6 @@ export default {
 }
 
 .square[data-level="3"] {
-    background-color: #196127;
+    background-color: #6709EE;
 }
 </style>
