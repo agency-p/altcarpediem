@@ -59,12 +59,14 @@ export default {
   methods: {
     debounceUpdate: debounce(function () {
       this.syncDiaryEntry()
-    }, 1500),
+    }, 1000),
     async syncDiaryEntry() {
       this.saved = false
       let d = this.displayTime.split("/")
       await updateDoc(doc(this.$db, "diary", `${this.uid}-${d[0]}${d[1]}${d[2]}`), this.diaryEntry);
-      this.saved = true
+      setTimeout(() => {
+        this.saved = true
+      }, 350)
     },
     async getDiaryEntry(date) {
       let d = date.split("/")
