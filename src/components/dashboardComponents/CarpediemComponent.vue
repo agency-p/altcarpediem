@@ -1,9 +1,16 @@
 <template>
-    <div class="graph">
-        <ul class="squares">
-            <!-- added via javascript -->
-        </ul>
-    </div>
+    <v-container>
+        <v-card class="graph mx-auto mt-8" rounded="xl" elevation="4">
+            <v-toolbar flat class="rounded-t-xl">
+                <v-toolbar-title>Carpediem</v-toolbar-title>
+            </v-toolbar>
+
+            <v-card-text class="pa-8">
+                <v-row class="squares"></v-row>
+                <!-- added via javascript -->
+            </v-card-text>
+        </v-card>
+    </v-container>
 </template>
 
 <script lang="ts">
@@ -12,10 +19,10 @@ export default {
     name: "CarpediemComponent",
     mounted() {
         const squares = document.querySelector('.squares');
-        var a = moment([2002, 9, 18]);
+        var a = moment([2015, 9, 8]);
         var b = moment();
-        let weekAge = b.diff(a, "weeks")
-        for (var i = 1; i < 4000; i++) {
+        let weekAge = b.diff(a, "week")
+        for (var i = 1; i < 4160; i++) {
             let level: number
             if (weekAge >= i) {
                 level = 3
@@ -23,59 +30,32 @@ export default {
             else {
                 level = 1
             }
-            squares!.insertAdjacentHTML('beforeend', `<li data-level="${level}"></li>`);
+            squares!.insertAdjacentHTML('beforeend', `<div class="square" data-level="${level}"></div>`);
         }
     }
 }
 </script>
 
 <style >
-:root {
-    --square-size: 15px;
-    --square-gap: 5px;
-    --week-width: calc(var(--square-size) + var(--square-gap));
+.square {
+    margin: 2px;
+    height: 15px;
+    width: 15px
 }
 
-.graph {
-    display: inline-grid;
-    grid-template-areas: "empty months"
-        "days squares";
-    grid-template-columns: auto 1fr;
-    grid-gap: 10px;
-}
-
-.graph {
-    padding: 20px;
-    border: 1px #e1e4e8 solid;
-    margin: 20px;
-}
-
-.squares {
-    grid-area: squares;
-}
-
-.days,
-.squares {
-    display: grid;
-    grid-gap: var(--square-gap);
-    grid-template-columns: repeat(80, var(--square-size));
-    grid-auto-flow: row;
-    grid-auto-columns: var(--square-size);
-}
-
-.squares li {
+.square {
     background-color: #4375c0;
 }
 
-.squares li[data-level="1"] {
+.square[data-level="1"] {
     background-color: #c6e48b;
 }
 
-.squares li[data-level="2"] {
+.square[data-level="2"] {
     background-color: #7bc96f;
 }
 
-.squares li[data-level="3"] {
+.square[data-level="3"] {
     background-color: #196127;
 }
 </style>
