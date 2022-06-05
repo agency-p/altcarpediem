@@ -40,7 +40,8 @@ export default {
 .square {
     margin: 2px;
     height: 15px;
-    width: 15px
+    width: 15px;
+    border-radius: 10%;
 }
 
 .square {
