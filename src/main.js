@@ -23,16 +23,23 @@ import { useUserAccStore } from "@/stores/userAcc";
 import { doc, getDoc } from "firebase/firestore";
 
 router.isReady().then(() => {
+  let mounted = false;
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       const userAccStore = useUserAccStore();
       const docRef = doc(db, "accs", user.uid);
       const docData = await getDoc(docRef);
       userAccStore.updateUserData(docData.data());
-      app.mount("#app");
+      if (mounted != true) {
+        app.mount("#app");
+        mounted = true;
+      }
       router.push("/");
     } else {
-      app.mount("#app");
+      if (mounted != true) {
+        app.mount("#app");
+        mounted = true;
+      }
       router.push("/auth");
     }
   });
