@@ -4,9 +4,11 @@
             <v-toolbar flat class="rounded-t-xl">
                 <v-toolbar-title>Carpediem</v-toolbar-title>
                 <v-toolbar-items>
-                    <v-text-field transition="scroll-y-transition"
-                        variant="outlined" density="compact" label="Birthdate" type="text" class="mt-9 mr-2"
-                        v-model="user.birthdate"></v-text-field>
+                    <v-text-field transition="scroll-y-transition" variant="outlined" density="compact"
+                        label="Birthdate" type="text" class="mt-9 mr-2" v-model="user.birthdate"></v-text-field>
+                    <v-select transition="scroll-y-transition" :items="Object.keys(lifeExpectancy)" variant="outlined"
+                        density="compact" label="Country" type="text" class="mt-9 mr-2" v-model="user.country">
+                    </v-select>
                     <v-select transition="scroll-y-transition" :items="Object.keys(lifeExpectancy)" variant="outlined"
                         density="compact" label="Country" type="text" class="mt-9" v-model="user.country"></v-select>
                 </v-toolbar-items>
@@ -25,30 +27,40 @@
 import moment from "moment"
 import { mapState } from "pinia";
 import { useUserAccStore } from "@/stores/userAcc";
+import { useTimeMachineStore } from "@/stores/timeMachine"
 import lifeExpectancy from "@/assets/json/lifeExpectancy.json"
 export default {
     name: "CarpediemComponent",
     data: () => ({
         lifeExpectancy: lifeExpectancy,
+        mode: "weeks"
     }),
     mounted() {
-        const squares = document.querySelector('.squares');
-        var a = moment([2015, 9, 8]);
-        var b = moment();
-        let weekAge = b.diff(a, "week")
-        for (var i = 1; i < 4160; i++) {
-            let level
-            if (weekAge >= i) {
-                level = 3
-            }
-            else {
-                level = 1
-            }
-            squares.insertAdjacentHTML('beforeend', `<div class="square" data-level="${level}"></div>`);
-        }
+        this.renderCarpediem
     },
     computed: {
-        ...mapState(useUserAccStore, ["user"])
+        renderCarpediem() {
+            const squares = document.querySelector('.squares');
+
+            var start = moment(this.user.birthdate, "DD/MM/YYYY");
+            var current = moment(this.displayTime, "DD/MM/YYYY");
+            let timeCounter = current.diff(start, this.mode)
+
+
+
+            for (let i = 1; i < 4160; i++) {
+                let level
+                if (timeCounter >= i) {
+                    level = 3
+                }
+                else {
+                    level = 1
+                }
+                squares.insertAdjacentHTML('beforeend', `<div class="square" data-level="${level}"></div>`);
+            }
+        },
+        ...mapState(useUserAccStore, ["user"]),
+        ...mapState(useTimeMachineStore, ["displayTime"])
     }
 }
 </script>
