@@ -28,18 +28,28 @@
             </v-sheet>
           </v-col> -->
           <v-col>
-            <v-text-field v-model="diaryEntry.title" color="primary" variant="outlined" @update:model-value="debounceUpdate"></v-text-field>
+
+
+            <div id="editorjs"></div>
+
+
+            <!-- <v-text-field v-model="diaryEntry.title" color="primary" variant="outlined" @update:model-value="debounceUpdate"></v-text-field>
             <v-textarea v-model="diaryEntry.text" color="primary" auto-grow @update:model-value="debounceUpdate"
               variant="outlined" label="Dear Diary">
-            </v-textarea>
+            </v-textarea> -->
           </v-col>
         </v-row>
       </v-card-text>
     </v-card>
+
   </v-container>
 </template>
 
 <script>
+import EditorJS from '@editorjs/editorjs';
+import Header from '@editorjs/header';
+import List from '@editorjs/list';
+import Embet from '@editorjs/embed';
 import { mapState } from "pinia";
 import { useUserAccStore } from "@/stores/userAcc";
 import { useTimeMachineStore } from "@/stores/timeMachine";
@@ -99,6 +109,21 @@ export default {
     ...mapState(useTimeMachineStore, ["displayTime"])
   },
   created() {
+    const editor = new EditorJS({
+      holderId: "editorjs",
+      tools: {
+        header: {
+          class: Header,
+          inlineToolbar: ["link"]
+        },
+        list: {
+          class: List,
+          inlineToolbar: ["link", "bold"]
+        },
+      
+      }
+    });
+
     this.getDiaryEntry(this.displayTime)
     this.$emitter.on('date-changed', (evt) => {
       this.getDiaryEntry(evt.date)
