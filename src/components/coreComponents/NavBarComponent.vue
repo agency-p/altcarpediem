@@ -12,6 +12,9 @@
 
         <template v-slot:append>
             <div class="pa-2">
+                <v-btn class="mb-2" block variant="contained-text" rounded="xl" @click="signOut">
+                    Send Feedback v{{pack.version}}
+                </v-btn>
                 <v-btn block variant="contained-text" color="primary" rounded="xl" @click="signOut">
                     Logout
                 </v-btn>
@@ -22,8 +25,10 @@
 
 <script>
 import { signOut } from "firebase/auth"
+import pack from "../../../package.json"
 export default {
     data: () => ({
+        pack,
         items: [
             { text: 'Dashboard', icon: 'mdi-view-dashboard', route: "/" },
             { text: 'Diary', icon: 'mdi-notebook', route: "/diary" },
