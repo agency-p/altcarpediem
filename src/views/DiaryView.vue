@@ -1,12 +1,15 @@
 <template>
   <v-container>
-    <v-card max-width="1400" class="mx-auto mt-8" rounded="xl" elevation="4">
+    <v-card max-width="1400" class="mx-auto mt-8 pb-5" rounded="xl" elevation="4">
       <v-toolbar flat class="rounded-t-xl">
         <v-toolbar-items>
           <v-icon v-if="saved">
             mdi-cloud-check
           </v-icon>
           <v-progress-circular indeterminate size="24" v-else></v-progress-circular>
+          <v-spacer></v-spacer>
+          <v-text-field v-model="diaryEntry.title" label="Title" color="primary" variant="outlined" density="compact" class="mt-9"
+            @update:model-value="debounceUpdate"></v-text-field>
           <v-spacer></v-spacer>
           <v-btn icon color="primary" @click="likeEntry">
             <v-icon>{{ diaryEntry.liked ? "mdi-heart" : "mdi-heart-outline" }}</v-icon>
@@ -15,9 +18,9 @@
       </v-toolbar>
 
 
-      <v-card-text>
-        <v-row>
-          <!--  <v-col>
+      <!--   <v-card-text>
+        <v-row class="container">
+           <v-col>
             <v-sheet v-ripple class="container" rounded="xl" color="#EEEEEE" height="300" width="100%"
               @click="$refs.file.click()">
               <input type="file" ref="file" style="display: none">
@@ -26,30 +29,33 @@
 
               </v-avatar>
             </v-sheet>
-          </v-col> -->
+          </v-col>
           <v-col>
 
 
-            <div id="editorjs"></div>
+            
 
-
-            <!-- <v-text-field v-model="diaryEntry.title" color="primary" variant="outlined" @update:model-value="debounceUpdate"></v-text-field>
             <v-textarea v-model="diaryEntry.text" color="primary" auto-grow @update:model-value="debounceUpdate"
               variant="outlined" label="Dear Diary">
-            </v-textarea> -->
+            </v-textarea>
           </v-col>
         </v-row>
-      </v-card-text>
+      </v-card-text> -->
+      <editor style="border-radius: 0px !important;" class="rounded-b-xl"
+        api-key="2zy9sbdmd73vk6zgef3ouui5rlansqmye7564tov3wamaqx5" :init="{
+          skin: 'bootstrap',
+          icons: 'bootstrap',
+          plugins: 'image lists link anchor charmap',
+          toolbar: 'blocks | bold italic bullist numlist | link image charmap',
+          menubar: false,
+        }" v-model="diaryEntry.text"  @update:model-value="debounceUpdate"/>
     </v-card>
 
   </v-container>
 </template>
 
 <script>
-import EditorJS from '@editorjs/editorjs';
-import Header from '@editorjs/header';
-import List from '@editorjs/list';
-import Embet from '@editorjs/embed';
+import Editor from '@tinymce/tinymce-vue'
 import { mapState } from "pinia";
 import { useUserAccStore } from "@/stores/userAcc";
 import { useTimeMachineStore } from "@/stores/timeMachine";
@@ -57,6 +63,9 @@ import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { debounce } from 'debounce';
 export default {
   name: "DirayView",
+  components: {
+    'editor': Editor
+  },
   data: () => ({
     saved: true,
     diaryEntry: {
@@ -109,20 +118,7 @@ export default {
     ...mapState(useTimeMachineStore, ["displayTime"])
   },
   created() {
-    const editor = new EditorJS({
-      holderId: "editorjs",
-      tools: {
-        header: {
-          class: Header,
-          inlineToolbar: ["link"]
-        },
-        list: {
-          class: List,
-          inlineToolbar: ["link", "bold"]
-        },
-      
-      }
-    });
+
 
     this.getDiaryEntry(this.displayTime)
     this.$emitter.on('date-changed', (evt) => {
@@ -134,8 +130,6 @@ export default {
 
 <style>
 .container {
-  display: flex;
-  justify-content: center;
-  align-content: center;
+  height: inherit
 }
 </style> 
