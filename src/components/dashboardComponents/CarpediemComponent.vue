@@ -86,6 +86,9 @@ export default {
         },
         'user.birthdate'(){
             this.renderCarpediem
+        },
+        'displayTime'(){
+            this.renderCarpediem
         }
     }
 }
