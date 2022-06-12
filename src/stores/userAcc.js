@@ -3,7 +3,9 @@ import { defineStore } from "pinia";
 export const useUserAccStore = defineStore({
   id: "userAcc",
   state: () => ({
-    user: null,
+    user: {
+      birthdate: ""
+    },
   }),
   actions: {
     updateUserData(data) {

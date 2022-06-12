@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-card max-width="1400" class="mx-auto mt-8 pb-5" rounded="xl" elevation="4">
+    <v-card max-width="1400" class="mx-auto mt-8 pb-5" rounded="xl" elevation="4" min-height="600">
       <v-toolbar flat class="rounded-t-xl">
         <v-toolbar-items>
           <v-icon v-if="saved">
@@ -41,7 +41,7 @@
           </v-col>
         </v-row>
       </v-card-text> -->
-      <editor style="border-radius: 0px !important;" class="rounded-b-xl"
+      <editor style="min-height: 600px;" class="rounded-b-xl"
         api-key="2zy9sbdmd73vk6zgef3ouui5rlansqmye7564tov3wamaqx5" :init="{
           skin: 'bootstrap',
           icons: 'bootstrap',
@@ -118,8 +118,6 @@ export default {
     ...mapState(useTimeMachineStore, ["displayTime"])
   },
   created() {
-
-
     this.getDiaryEntry(this.displayTime)
     this.$emitter.on('date-changed', (evt) => {
       this.getDiaryEntry(evt.date)
