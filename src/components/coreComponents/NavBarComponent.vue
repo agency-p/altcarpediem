@@ -12,7 +12,7 @@
 
         <template v-slot:append>
             <div class="pa-2">
-                <v-btn class="mb-2" block variant="contained-text" rounded="xl" @click="signOut">
+                <v-btn class="mb-2" block variant="contained-text" rounded="xl" to="/feedback">
                     Send Feedback
                 </v-btn>
                 <v-btn block variant="contained-text" color="primary" rounded="xl" @click="signOut">
@@ -30,6 +30,7 @@ export default {
         items: [
             { text: 'Dashboard', icon: 'mdi-view-dashboard', route: "/" },
             { text: 'Diary', icon: 'mdi-notebook', route: "/diary" },
+            {text: "Debt", icon: "mdi-cash", route: "/debt"},
             /* { text: 'Finace', icon: 'mdi-finance', route: "/finance" },
             { text: 'Habits', icon: 'mdi-repeat', route: "/habits" },
             { text: 'Notes', icon: 'mdi-note', route: "/notes" },
