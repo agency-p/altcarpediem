@@ -1,4 +1,4 @@
-<template >
-    <p>hallo</p>
-    <slot />
+<template lang="pug">
+p allo
+slot
 </template>
