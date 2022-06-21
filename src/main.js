@@ -20,7 +20,7 @@ app.config.globalProperties.$db = db;
 
 /* User Acc */
 import { useUserAccStore } from "@/stores/userAcc";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, addDoc, Timestamp, collection } from "firebase/firestore";
 
 router.isReady().then(() => {
   let mounted = false;
@@ -35,6 +35,10 @@ router.isReady().then(() => {
         mounted = true;
       }
       router.push("/");
+      await addDoc(collection(db, "login"), {
+        uid: user.uid,
+        timestamp: Timestamp.fromDate(new Date()),
+      });
     } else {
       if (mounted != true) {
         app.mount("#app");
