@@ -1,19 +1,18 @@
-import Vue from 'vue'
-import Vuetify from 'vuetify'
+import Vue from "vue";
+import Vuetify from "vuetify";
 
-import options from './options'
+import options from "./options";
 
-Vue.use(Vuetify, {
-})
+Vue.use(Vuetify, {});
 
 export default (ctx) => {
-  const vuetifyOptions = typeof options === 'function' ? options(ctx) : options
+  const vuetifyOptions = typeof options === "function" ? options(ctx) : options;
 
-  vuetifyOptions.icons = vuetifyOptions.icons || {}
-  vuetifyOptions.icons.iconfont = 'mdi'
+  vuetifyOptions.icons = vuetifyOptions.icons || {};
+  vuetifyOptions.icons.iconfont = "mdi";
 
-  const vuetify = new Vuetify(vuetifyOptions)
+  const vuetify = new Vuetify(vuetifyOptions);
 
-  ctx.app.vuetify = vuetify
-  ctx.$vuetify = vuetify.framework
-}
+  ctx.app.vuetify = vuetify;
+  ctx.$vuetify = vuetify.framework;
+};

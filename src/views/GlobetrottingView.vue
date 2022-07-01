@@ -8,14 +8,13 @@
 </template>
 
 <script>
-import SvgMapComponent from "@/components/globetrottingComponents/SvgMapComponent.vue"
+import SvgMapComponent from "@/components/globetrottingComponents/SvgMapComponent.vue";
 export default {
   name: "GlobetrottingView",
   components: {
-    SvgMapComponent
-  }
-}
+    SvgMapComponent,
+  },
+};
 </script>
 
-<style>
-</style>
+<style></style>

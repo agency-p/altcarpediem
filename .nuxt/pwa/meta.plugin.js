@@ -1,6 +1,6 @@
-import { mergeMeta } from './meta.utils'
-import meta from './meta.json'
+import { mergeMeta } from "./meta.utils";
+import meta from "./meta.json";
 
 export default function ({ app }) {
-  mergeMeta(app.head, meta)
+  mergeMeta(app.head, meta);
 }

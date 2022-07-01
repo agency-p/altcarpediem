@@ -7,7 +7,7 @@ export const useAuthModeStore = defineStore({
   }),
   actions: {
     switchAuthMode() {
-      this.authMode = !this.authMode
-    }
-  }
+      this.authMode = !this.authMode;
+    },
+  },
 });

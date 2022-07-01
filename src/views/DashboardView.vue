@@ -7,10 +7,9 @@ import CarpediemComponent from "../components/dashboardComponents/CarpediemCompo
 export default {
   name: "DashboardView",
   components: {
-    CarpediemComponent
+    CarpediemComponent,
   },
 };
 </script>
 
-<style>
-</style>
+<style></style>

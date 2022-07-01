@@ -18,10 +18,9 @@ export default {
   components: {
     PwaReloadComponent,
     AppBarComponent,
-    NavBarComponent
+    NavBarComponent,
   },
 };
 </script>
 
-<style>
-</style>
+<style></style>

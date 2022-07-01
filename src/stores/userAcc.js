@@ -4,7 +4,7 @@ export const useUserAccStore = defineStore({
   id: "userAcc",
   state: () => ({
     user: {
-      birthdate: ""
+      birthdate: "",
     },
   }),
   actions: {

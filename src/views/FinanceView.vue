@@ -7,16 +7,15 @@ export default {
   name: "Finance",
   data: function () {
     return {
-      testEvent: 'String to change'
-    }
+      testEvent: "String to change",
+    };
   },
   created() {
-    this.$emitter.on('date-changed', (evt) => {
-      console.log(evt.date)
-    })
-  }
-}
+    this.$emitter.on("date-changed", (evt) => {
+      console.log(evt.date);
+    });
+  },
+};
 </script>
 
-<style>
-</style>
+<style></style>
