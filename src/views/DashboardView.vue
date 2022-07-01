@@ -1,14 +1,14 @@
 <template>
-  <CarpediemComponent></CarpediemComponent>
+	<CarpediemComponent></CarpediemComponent>
 </template>
 
 <script>
-import CarpediemComponent from "../components/dashboardComponents/CarpediemComponent.vue";
+import CarpediemComponent from '../components/dashboardComponents/CarpediemComponent.vue';
 export default {
-  name: "DashboardView",
-  components: {
-    CarpediemComponent,
-  },
+	name: 'DashboardView',
+	components: {
+		CarpediemComponent,
+	},
 };
 </script>
 
