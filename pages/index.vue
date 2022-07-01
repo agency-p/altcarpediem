@@ -1,5 +1,9 @@
-<template lang='pug'>
-h1 hallo
+<template>
+    <div>
+        <template v-slot:toolbar-slot="">
+            <div>hallo</div>
+        </template>
+    </div>
 </template>
 
 <script lang='ts'>

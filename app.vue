@@ -1,4 +1,5 @@
 <template lang="pug">
-NuxtLayout( name="desktop" )
-  NuxtPage 
+v-theme-provider(theme="light" with-background)
+  NuxtLayout( name="desktop" )
+    NuxtPage 
 </template>
