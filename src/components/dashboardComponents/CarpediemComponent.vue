@@ -72,6 +72,24 @@ export default {
 		this.renderCarpediem;
 	},
 	computed: {
+		...mapState(useUserAccStore, ['user']),
+		...mapState(useTimeMachineStore, ['displayTime']),
+	},
+	watch: {
+		mode() {
+			this.renderCarpediem;
+		},
+		'user.country'() {
+			this.renderCarpediem;
+		},
+		'user.birthdate'() {
+			this.renderCarpediem;
+		},
+		displayTime() {
+			this.renderCarpediem;
+		},
+	},
+	methods: {
 		renderCarpediem() {
 			const squares = document.querySelector('.squares');
 			let children = [].slice.call(
@@ -107,22 +125,6 @@ export default {
 					`<div id="square" class="square" data-level="${level}"></div>`
 				);
 			}
-		},
-		...mapState(useUserAccStore, ['user']),
-		...mapState(useTimeMachineStore, ['displayTime']),
-	},
-	watch: {
-		mode() {
-			this.renderCarpediem;
-		},
-		'user.country'() {
-			this.renderCarpediem;
-		},
-		'user.birthdate'() {
-			this.renderCarpediem;
-		},
-		displayTime() {
-			this.renderCarpediem;
 		},
 	},
 };

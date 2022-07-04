@@ -23,7 +23,6 @@
 					block
 					variant="contained-text"
 					rounded="xl"
-					@click="signOut"
 				>
 					Send Feedback
 				</v-btn>

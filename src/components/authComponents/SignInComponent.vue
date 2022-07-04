@@ -61,8 +61,7 @@ export default {
 				this.form.email,
 				this.form.password
 			)
-				.then((userCredential) => {
-					const user = userCredential.user;
+				.then(() => {
 					this.$router.push('/');
 				})
 				.catch((error) => {
